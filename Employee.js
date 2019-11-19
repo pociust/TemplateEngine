@@ -8,8 +8,8 @@ class Employee {
 
 // functio
 
-const tom = new Employee("tom", 2);
-console.log(tom);
+// const tom = new Employee("tom", 2);
+// console.log(tom);
 
 module.exports = Employee;
 
