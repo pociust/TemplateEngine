@@ -1,32 +1,32 @@
 const inquirer = require("inquirer");
-const manager = require("./Manager")
+const manager = require("./Manager");
 // const Employee = require("./../Employee");
+let userObject = {};
 
+inquirer
+  .prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is your name?"
+    },
+    {
+      type: "list",
+      name: "employee",
+      message: "What is your role?",
+      choices: ["Manager", "Engineer", "Intern"]
+    }
+  ])
+  .then(async answer => {
+    if (answer.employee === "Manager") {
+      userObject = await manager.CreateManager(answer.name);
+    } else {
+      console.log("bad");
+      return;
+    }
+    createHTML(userObject);
+  });
 
-
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "What is your name?",
-      },
-      {
-        type: "list",
-        name: "employee",
-        message: "What is your role?",
-        choices: ["Manager", "Engineer", "Intern"]
-      }
-    ])
-    .then(answer => {
-      console.log(manager);
-      if (answer.employee === "Manager") {
-        console.log("good");
-        manager.CreateManager(answer.name);
-      } else {
-        console.log("bad");
-      }
-    });
-
-    
-
+function createHTML() {
+  console.log("1234", userObject);
+}
