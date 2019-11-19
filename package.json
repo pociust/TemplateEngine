@@ -1,0 +1,23 @@
+{
+  "name": "templateengine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pociust/TemplateEngine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pociust/TemplateEngine/issues"
+  },
+  "homepage": "https://github.com/pociust/TemplateEngine#readme",
+  "dependencies": {
+    "inquirer": "^7.0.0",
+    "jest": "^24.9.0"
+  }
+}
