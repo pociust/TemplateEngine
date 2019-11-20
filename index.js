@@ -1,27 +1,26 @@
 const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
 const newTeam = [];
 let userObject = {};
-// let internObject = {};
 let lastID = -1;
-
-// const createTeam = () => {
-//   console.log("success");
-//   console.log(newTeam);
-// };
-
-
 
 
 const createHTML = () => {
   console.log("team", newTeam);
   newTeam.forEach(teamMember => {
-    // let uniqueVariable = '';
+    let uniqueVariable = "";
 
-    // teamMember.email ? teamMember.email = uniqueVariable : 
-
-
+    if (teamMember.office) {
+      uniqueVariable = `Office #: ${teamMember.office}`;
+    }
+    if (teamMember.school) {
+      uniqueVariable = `School: ${teamMember.school}`;
+    }
+    if (teamMember.github) {
+      uniqueVariable = `Github: ${teamMember.github}`;
+    }
 
     const contentSection = `
     <div>
@@ -36,8 +35,8 @@ const createHTML = () => {
     <div>
       ${uniqueVariable}
     </div>
-    ` 
-    console.log(contentSection)
+    `;
+    console.log(contentSection);
   });
 };
 
@@ -54,16 +53,12 @@ const init = () => {
     ])
     .then(({ employee }) => {
       if (employee === "Manager") {
-        console.log("manager");
         newManager();
       }
       if (employee === "Engineer") {
-        console.log("engineer");
-
         newEngineer();
       }
       if (employee === "Intern") {
-        console.log("intern");
         newIntern();
       }
     });
@@ -116,9 +111,55 @@ const newManager = manager => {
       }
     });
 };
+const newEngineer = engineer => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is your name?"
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is your email?"
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is your Github username?"
+      },
+      {
+        type: "confirm",
+        name: "newmember",
+        message: "Would you like to enter a new employee?",
+        default: false
+      }
+    ])
+    .then(answers => {
+      userObject = new Engineer(
+        answers.name,
+        "Engineer",
+        answers.email,
+        lastID,
+        answers.github
+      );
+      console.log();
+      return answers;
+    })
+    .then(answers => {
+      if (answers.newmember === true) {
+        newTeam.push(userObject);
+        // createTeam();
+        init();
+      } else {
+        newTeam.push(userObject);
+        createHTML(newTeam);
+      }
+    });
+};
 
 const newIntern = intern => {
-  console.log(intern);
   inquirer
     .prompt([
       {
@@ -165,16 +206,5 @@ const newIntern = intern => {
       }
     });
 };
-// module.exports = { init };
-// {
-//   type: "input",
-//   name: "name",
-//   message: "What is your name?"
-// },
-// {
-//   type: "input",
-//   name: "email",
-//   message: "What is your email?"
-// },
 
 init();
