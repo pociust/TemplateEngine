@@ -18,6 +18,7 @@
   "homepage": "https://github.com/pociust/TemplateEngine#readme",
   "dependencies": {
     "inquirer": "^7.0.0",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "jsdom": "^15.2.1"
   }
 }
