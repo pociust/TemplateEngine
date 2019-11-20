@@ -2,14 +2,44 @@ const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const newTeam = [];
-let managerObject = {};
-let internObject = {};
+let userObject = {};
+// let internObject = {};
 let lastID = -1;
 
-function createTeam() {
-  console.log("success");
-  console.log(newTeam);
-}
+// const createTeam = () => {
+//   console.log("success");
+//   console.log(newTeam);
+// };
+
+
+
+
+const createHTML = () => {
+  console.log("team", newTeam);
+  newTeam.forEach(teamMember => {
+    // let uniqueVariable = '';
+
+    // teamMember.email ? teamMember.email = uniqueVariable : 
+
+
+
+    const contentSection = `
+    <div>
+      Role:${teamMember.role}
+    </div>
+    <div>
+      Name: ${teamMember.name}
+    </div>
+    <div>
+      Email: ${teamMember.email}
+    </div>
+    <div>
+      ${uniqueVariable}
+    </div>
+    ` 
+    console.log(contentSection)
+  });
+};
 
 const init = () => {
   lastID = lastID + 1;
@@ -65,7 +95,7 @@ const newManager = manager => {
       }
     ])
     .then(answers => {
-      managerObject = new Manager(
+      userObject = new Manager(
         answers.name,
         "manager",
         answers.email,
@@ -77,11 +107,12 @@ const newManager = manager => {
     })
     .then(answers => {
       if (answers.newmember === true) {
-        newTeam.push(managerObject);
-        createTeam();
+        newTeam.push(userObject);
+        // createTeam();
         init();
       } else {
-        // createHTML(userObject);
+        newTeam.push(userObject);
+        createHTML(newTeam);
       }
     });
 };
@@ -113,7 +144,7 @@ const newIntern = intern => {
       }
     ])
     .then(answers => {
-      internObject = new Intern(
+      userObject = new Intern(
         answers.name,
         "Intern",
         answers.email,
@@ -125,10 +156,11 @@ const newIntern = intern => {
     })
     .then(answers => {
       if (answers.newmember === true) {
-        newTeam.push(internObject);
-        createTeam();
+        newTeam.push(userObject);
+        // createTeam();
         init();
       } else {
+        newTeam.push(userObject);
         createHTML();
       }
     });
