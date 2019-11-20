@@ -1,12 +1,13 @@
 const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
 const newTeam = [];
-let userObject = {};
+let managerObject = {};
+let internObject = {};
 let lastID = -1;
 
-
 function createTeam() {
-  console.log('success')
+  console.log("success");
   console.log(newTeam);
 }
 
@@ -39,7 +40,6 @@ const init = () => {
 };
 
 const newManager = manager => {
-  console.log(manager);
   inquirer
     .prompt([
       {
@@ -65,19 +65,67 @@ const newManager = manager => {
       }
     ])
     .then(answers => {
-       userObject = new Manager(
+      managerObject = new Manager(
         answers.name,
         "manager",
         answers.email,
         lastID,
         answers.office
       );
-      console.log()
+      console.log();
       return answers;
     })
     .then(answers => {
       if (answers.newmember === true) {
-        newTeam.push(userObject);
+        newTeam.push(managerObject);
+        createTeam();
+        init();
+      } else {
+        // createHTML(userObject);
+      }
+    });
+};
+
+const newIntern = intern => {
+  console.log(intern);
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is your name?"
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is your email?"
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "Where do/did you go to school?"
+      },
+      {
+        type: "confirm",
+        name: "newmember",
+        message: "Would you like to enter a new employee?",
+        default: false
+      }
+    ])
+    .then(answers => {
+      internObject = new Intern(
+        answers.name,
+        "Intern",
+        answers.email,
+        lastID,
+        answers.school
+      );
+      console.log();
+      return answers;
+    })
+    .then(answers => {
+      if (answers.newmember === true) {
+        newTeam.push(internObject);
         createTeam();
         init();
       } else {
@@ -85,48 +133,6 @@ const newManager = manager => {
       }
     });
 };
-
-
-
-// const newIntern = intern => {
-//   console.log(manager);
-//   inquirer
-//     .prompt([
-//       {
-//         type: "input",
-//         name: "name",
-//         message: "What is your name?"
-//       },
-//       {
-//         type: "input",
-//         name: "email",
-//         message: "What is your email?"
-//       },
-//       {
-//         type: "input",
-//         name: "school",
-//         message: "Where did you go to school?"
-//       }
-//     ])
-//     .then(answers => {
-//       const userObject = new Intern (answers.name, 'manager', answers.email, answers.office)
-//         console.log('user', userObject)
-//       console.log(answers);
-//     });
-// };
-
-//     .then(async answer => {
-//       let userObject = {};
-//       if (answer.employee === "Manager") {
-//         userObject = await manager.CreateManager(answer.name);
-//       } else {
-//         console.log("bad");
-//         return;
-//       }
-//       console.log(userObject);
-//     });
-// }
-
 // module.exports = { init };
 // {
 //   type: "input",
