@@ -20,7 +20,7 @@ const createTeam = () => {
       uniqueVariable = `<span>School:</span> ${teamMember.school}`;
     }
     if (teamMember.github) {
-      uniqueVariable = `<span>Github:</span> ${teamMember.github}`;
+      uniqueVariable = `<span>Github:</span> <a href="https://www.github.com/${teamMember.github}" target="_blank"> ${teamMember.github} </a>`;
     }
 
     contentDiv =
