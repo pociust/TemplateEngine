@@ -30,7 +30,7 @@ const createTeam = () => {
         <div class="banner">
           ${teamMember.role}
         </div>
-        <div class="p-15">
+        <div class="spacing">
           <div>
             <span>Name:</span> ${teamMember.name}
           </div>
