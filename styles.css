@@ -4,10 +4,12 @@ body {
 }
 
 .card {
-  width: 300px;
+  width: 250px;
   line-height: 150%;
   font-size: 17px;
   margin: 15px;
+  overflow: hidden;
+  border-radius: 22px;
 }
 
 .card span {
@@ -34,4 +36,8 @@ body {
 
 .Intern .banner {
   background-color: #4caf50;
+}
+
+.spacing {
+  padding: 8px 15px 15px 8px;
 }
