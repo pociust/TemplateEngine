@@ -1,0 +1,37 @@
+body {
+  font-family: sans-serif;
+  font-weight: 500;
+}
+
+.card {
+  width: 300px;
+  line-height: 150%;
+  font-size: 17px;
+  margin: 15px;
+}
+
+.card span {
+  font-weight: bold;
+}
+
+.banner {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 23px;
+  margin-bottom: 4px;
+  padding: 8px 0;
+}
+
+.Manager .banner {
+  background-color: #e53935;
+}
+
+.Engineer .banner {
+  background-color: #03a9f4;
+}
+
+.Intern .banner {
+  background-color: #4caf50;
+}
