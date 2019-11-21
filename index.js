@@ -1,42 +1,80 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 const newTeam = [];
 let userObject = {};
+let contentDiv = "";
 let lastID = -1;
 
-
-const createHTML = () => {
+const createTeam = () => {
   console.log("team", newTeam);
   newTeam.forEach(teamMember => {
     let uniqueVariable = "";
 
     if (teamMember.office) {
-      uniqueVariable = `Office #: ${teamMember.office}`;
+      uniqueVariable = `<span>Office #:</span> ${teamMember.office}`;
     }
     if (teamMember.school) {
-      uniqueVariable = `School: ${teamMember.school}`;
+      uniqueVariable = `<span>School:</span> ${teamMember.school}`;
     }
     if (teamMember.github) {
-      uniqueVariable = `Github: ${teamMember.github}`;
+      uniqueVariable = `<span>Github:</span> ${teamMember.github}`;
     }
 
-    const contentSection = `
-    <div>
-      Role:${teamMember.role}
-    </div>
-    <div>
-      Name: ${teamMember.name}
-    </div>
-    <div>
-      Email: ${teamMember.email}
-    </div>
-    <div>
-      ${uniqueVariable}
-    </div>
+    contentDiv =
+      contentDiv +
+      `
+      <div class="card ${teamMember.role} shadow-light">
+        <div class="banner">
+          ${teamMember.role}
+        </div>
+        <div class="p-15">
+          <div>
+            <span>Name:</span> ${teamMember.name}
+          </div>
+          <div>
+          <span>ID:</span> ${teamMember.id}
+          </div>
+          <div>
+          <span>Email:</span> ${teamMember.email}
+          </div>
+          <div>
+           ${uniqueVariable}
+          </div>
+        </div>
+      </div>
     `;
-    console.log(contentSection);
+  });
+  createHTML();
+};
+
+const createHTML = () => {
+  console.log("html", contentDiv);
+  let footerDiv = `
+  </div>
+  </body>
+  </html>`;
+  let headerSection = `
+  <!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Frow Project</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/frow@3/dist/frow.min.css">
+      <link rel="stylesheet" href="../styles.css"/>
+      <title>ProfileGenerator</title>
+    </head>
+    <body>
+    <div class="frow">`;
+
+  let newHTML = headerSection + contentDiv + footerDiv;
+  fs.writeFile("./output/index.html", newHTML, function(err) {
+    if (err) {
+      return console.log(err);
+    }
   });
 };
 
@@ -92,7 +130,7 @@ const newManager = manager => {
     .then(answers => {
       userObject = new Manager(
         answers.name,
-        "manager",
+        "Manager",
         answers.email,
         lastID,
         answers.office
@@ -103,11 +141,10 @@ const newManager = manager => {
     .then(answers => {
       if (answers.newmember === true) {
         newTeam.push(userObject);
-        // createTeam();
         init();
       } else {
         newTeam.push(userObject);
-        createHTML(newTeam);
+        createTeam(newTeam);
       }
     });
 };
@@ -150,11 +187,10 @@ const newEngineer = engineer => {
     .then(answers => {
       if (answers.newmember === true) {
         newTeam.push(userObject);
-        // createTeam();
         init();
       } else {
         newTeam.push(userObject);
-        createHTML(newTeam);
+        createTeam(newTeam);
       }
     });
 };
@@ -198,11 +234,10 @@ const newIntern = intern => {
     .then(answers => {
       if (answers.newmember === true) {
         newTeam.push(userObject);
-        // createTeam();
         init();
       } else {
         newTeam.push(userObject);
-        createHTML();
+        createTeam();
       }
     });
 };
