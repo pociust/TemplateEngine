@@ -38,7 +38,7 @@ const createTeam = () => {
           <span>ID:</span> ${teamMember.id}
           </div>
           <div>
-          <span>Email:</span> ${teamMember.email}
+          <span>Email:</span> <a href = "mailto:${teamMember.email}"> ${teamMember.email}</a>
           </div>
           <div>
            ${uniqueVariable}
