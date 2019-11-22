@@ -11,9 +11,9 @@ let lastID = -1;
 const createTeam = () => {
   newTeam.forEach(teamMember => {
     let uniqueVariable = "";
-
-    if (teamMember.office) {
-      uniqueVariable = `<span>Office #:</span> ${teamMember.office}`;
+    console.log(teamMember);
+    if (teamMember.officeNum) {
+      uniqueVariable = `<span>Office #:</span> ${teamMember.officeNum}`;
     }
     if (teamMember.school) {
       uniqueVariable = `<span>School:</span> ${teamMember.school}`;
@@ -126,6 +126,7 @@ const newManager = manager => {
       }
     ])
     .then(answers => {
+      console.log(answers);
       userObject = new Manager(
         answers.name,
         "Manager",
