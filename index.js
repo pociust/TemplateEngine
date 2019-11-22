@@ -9,7 +9,6 @@ let contentDiv = "";
 let lastID = -1;
 
 const createTeam = () => {
-  console.log("team", newTeam);
   newTeam.forEach(teamMember => {
     let uniqueVariable = "";
 
@@ -51,7 +50,6 @@ const createTeam = () => {
 };
 
 const createHTML = () => {
-  console.log("html", contentDiv);
   let footerDiv = `
   </div>
   </body>
@@ -135,7 +133,6 @@ const newManager = manager => {
         lastID,
         answers.office
       );
-      console.log();
       return answers;
     })
     .then(answers => {
