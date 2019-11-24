@@ -60,7 +60,6 @@ const createHTML = () => {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Frow Project</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/frow@3/dist/frow.min.css">
       <link rel="stylesheet" href="../styles.css"/>
       <title>ProfileGenerator</title>
