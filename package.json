@@ -19,6 +19,6 @@
   "dependencies": {
     "inquirer": "^7.0.0",
     "jest": "^24.9.0",
-    "jsdom": "^15.2.1"
+    "jsdom": "^16.5.0"
   }
 }
